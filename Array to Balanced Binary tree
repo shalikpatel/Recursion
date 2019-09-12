@@ -1,0 +1,52 @@
+#include <iostream>
+using namespace std;
+
+struct node
+{
+    int data;
+    struct node *left;
+    struct node *right;
+};
+
+struct node * arrToBST(int arr[], int l, int r)
+{
+    if(l > r) {
+        return NULL;
+    }
+    int mid = (l+r)/2;
+    struct node *head = (struct node *)malloc(sizeof(struct node));
+    head->data = arr[mid];
+    head->left = arrToBST(arr, l, mid-1);
+    head->right = arrToBST(arr, mid+1, r);
+    
+    return head;
+    
+}
+
+void preorder(struct node *head)
+{
+    if(head == NULL) {
+        return ;
+    }
+    
+    cout << head->data << " ";
+    preorder(head->left);
+    preorder(head->right);
+}
+
+int main() {
+    struct node *head;
+    int n;
+    cin >> n;
+    int arr[n];
+    for(int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+    
+    head = arrToBST(arr, 0, n-1);
+    
+    preorder(head);
+    cout << endl;
+
+	return 0;
+}
