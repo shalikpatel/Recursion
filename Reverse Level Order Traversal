@@ -1,0 +1,30 @@
+
+//Reverse Level Order Traversal.
+
+void reversePrint(Node *root)
+{
+    stack<int> st;
+    queue<Node *> q;
+    Node *temp = NULL;
+    if(root == NULL) {
+        return;
+    } else {
+        q.push(root);
+        while(!q.empty()) {
+            temp = q.front();
+            q.pop();
+            st.push(temp->data);
+            
+            if(temp->right) {
+                q.push(temp->right);
+            }
+            if(temp->left) {
+                q.push(temp->left);
+            }
+        }
+    }
+    while(!st.empty()) {
+        cout << st.top() << " ";
+        st.pop();
+    }
+}
